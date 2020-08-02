@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_02_132716) do
+ActiveRecord::Schema.define(version: 2020_08_02_133004) do
 
   create_table "situations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "status"
@@ -26,6 +26,9 @@ ActiveRecord::Schema.define(version: 2020_08_02_132716) do
     t.string "profile"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "situation_id"
+    t.index ["situation_id"], name: "index_users_on_situation_id"
   end
 
+  add_foreign_key "users", "situations"
 end
