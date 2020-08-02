@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_02_221219) do
+ActiveRecord::Schema.define(version: 2020_08_02_221444) do
+
+  create_table "loads", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "content"
+    t.string "p"
+    t.bigint "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_loads_on_parent_id"
+  end
 
   create_table "parents", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -37,6 +46,7 @@ ActiveRecord::Schema.define(version: 2020_08_02_221219) do
     t.index ["situation_id"], name: "index_users_on_situation_id"
   end
 
+  add_foreign_key "loads", "parents"
   add_foreign_key "parents", "users"
   add_foreign_key "users", "situations"
 end
